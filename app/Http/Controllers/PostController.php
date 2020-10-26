@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 
 use Illuminate\Http\Request;
@@ -33,26 +34,24 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        $validatedData = $request->validate([
-            'title'   => 'bail|required|min:5|max:100' ,
-            'content' => 'bail|required|min:10'
-        ]);
-
-        $blogPost = new BlogPost();
-        $blogPost->title = $request->input('title');
-        $blogPost->content = $request->input('content');
-        $blogPost->save();
-
+        $validatedData = $request->validated();
+        //ใช้ ::create แทนเลยไม่ต้อง new BlogPost ใหม่และก็ save ให้เลย
+        $blogPost = BlogPost::create($validatedData);
         $request->session()->flash('status','Blog post was created!');
-
         //return redirect()->route('posts.index');
         return redirect()->route('posts.show', ['post' => $blogPost -> id]);
     }
 
+    public function edit($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        return view('posts.edit', ['post' => $post]);
+    }
     
-    
-
-    
+    public function update($id)
+    {
+        return view('posts.update');
+    }
 }

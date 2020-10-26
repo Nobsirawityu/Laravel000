@@ -5,12 +5,14 @@
         @csrf
         <p>
             <label>Title</label>
-            <input type="text" name='title'/>
+            {{-- ใส่ value="{{ Old('title') }}" เพื่อที่จะให้เมื่อใส่ในฟอร์มไม่ครบหรือไม่ถูกต้องก็จะคงค่าที่เคยกรอกไว้ให้ --}}
+            <input type="text" name='title' value="{{ old('title') }}"/>
         </p>
         
         <p>
             <label>Content</label>
-            <input type="text" name='content'/>
+            {{-- ใส่ value="{{ Old('content') }}" เพื่อที่จะให้เมื่อใส่ในฟอร์มไม่ครบหรือไม่ถูกต้องก็จะคงค่าที่เคยกรอกไว้ให้ --}}
+            <input type="text" name='content' value="{{ old('content') }}"/>
         </p>
 
         @if ($errors->any())

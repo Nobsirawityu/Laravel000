@@ -23,4 +23,4 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 // });
 Route::get('/contact', 'HomeController@contact')->name('contact');
 //Route::view('/contact', 'contact')->name('contact');
-Route::resource('/posts', 'PostController')->only(['index','show','create','store']);
+Route::resource('/posts', 'PostController')->except(['destroy']);

@@ -2,12 +2,16 @@
 
 @section('content')
     @forelse ($posts as $post)
-    <p>
-        <h3>
-            <a href="{{ route('posts.show', ['post'=>$post->id ]) }}">{{ $post->content }}</a>
-        </h3>
-    </p>
+        <p>
+            <h3>
+                <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+            </h3>
+
+            <a href="{{ route('posts.edit', ['post' => $post->id]) }}">
+                Edit
+            </a>
+        </p>
     @empty
-    <p>No blog post yet!!!</p>
+        <p>No blog posts yet!</p>
     @endforelse
 @endsection('content')
